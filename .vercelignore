@@ -1,0 +1,11 @@
+node_modules
+vendor
+.env
+.env.*
+.git
+README.md
+build-guides
+tests
+storage/framework/sessions
+storage/framework/views
+storage/logs
