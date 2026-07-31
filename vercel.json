@@ -1,9 +1,15 @@
 {
-  "version": 2,  "buildCommand": "npm run build",
-  "outputDirectory": "public",  "routes": [
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.php",
+      "use": "@vercel/php"
+    }
+  ],
+  "routes": [
     {
       "src": "/(.*)",
-      "dest": "api/index.php"
+      "dest": "/api/index.php"
     }
   ]
 }
