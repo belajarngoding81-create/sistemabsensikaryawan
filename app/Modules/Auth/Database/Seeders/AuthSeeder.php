@@ -20,14 +20,17 @@ class AuthSeeder extends Seeder
         // Optionally create default permissions (empty for now)
         Permission::firstOrCreate(['slug' => 'manage-users'], ['name' => 'Manage Users']);
 
-        // Create initial user
-        $user = User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
+        // Create or update initial admin user
+        $user = User::updateOrCreate([
+            'email' => 'admin@gmail.com',
+        ], [
+            'name' => 'Super Admin',
+            'password' => Hash::make('12345678'),
         ]);
 
-        // Attach admin role
-        $user->roles()->attach($admin->id);
+        // Attach admin role if not already attached
+        if (! $user->roles()->where('role_id', $admin->id)->exists()) {
+            $user->roles()->attach($admin->id);
+        }
     }
 }
